@@ -51,6 +51,7 @@ X_test = scaler.transform(X_test) # transform the test features using the same s
 model = LogisticRegression(max_iter = 1000) # create a logistic regression model
 model.fit(X_train,y_train) # fit the model to the training data
 
+# %%
 y_pred = model.predict(X_test) # make predictions on the test set
 print("Accuracy:", accuracy_score(y_test,y_pred))
 print("Classification Report:\n", classification_report(y_test,y_pred))
@@ -66,4 +67,5 @@ print("Actual label for the sample:", y_test.iloc[0:4].values) # print the actua
 
 
 #Step 10: Break the system, build a better model, and repeat the process
+
 
