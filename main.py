@@ -1,3 +1,4 @@
+# %%
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -24,8 +25,9 @@ cldf = pd.get_dummies(cldf, columns=["sex","cp", "restecg", "slope", "thal"], dr
 # print(cldf.describe())
 # print(cldf["num"].value_counts())
 
-# sns.countplot(x="num",data=cldf) # visualize the distribution of the target variable "num"
-# plt.show()  
+# %%
+sns.countplot(x="num",data=cldf) # visualize the distribution of the target variable "num"
+plt.show()  
 
 
 # for col in cldf.columns:
