@@ -96,9 +96,10 @@ Average of metrics weighted by the number of samples in each class.
 * **Macro avg → equal importance to all classes**
 * **Weighted avg → importance based on class size**
 
-Here is a **clean combined version (Markdown-ready)** of both sections:
 
-## Why Stratified Sampling Matters in Model Evaluation??
+
+
+# Why Stratified Sampling Matters in Model Evaluation??
 
 ## ⚠️ Why “without stratify” is tricky
 
