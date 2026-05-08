@@ -97,6 +97,7 @@ Average of metrics weighted by the number of samples in each class.
 * **Weighted avg → importance based on class size**
 
 
+---
 
 
 # Why Stratified Sampling Matters in Model Evaluation??

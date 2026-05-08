@@ -71,3 +71,4 @@ print("Actual label for the sample:", y_test.iloc[0:4].values) # print the actua
 y_prob = model.predict_proba(X_test)[:, 1]
 print("ROC-AUC:", roc_auc_score(y_test, y_prob))
 
+
