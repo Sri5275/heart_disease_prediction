@@ -1,4 +1,5 @@
 # %%
+# %%
 import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -6,6 +7,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
+from sklearn.metrics import roc_auc_score
 import pickle
 
 df = pd.read_csv('heart_disease_uci.csv')
@@ -39,7 +41,7 @@ X = cldf.drop(columns=["num"]) # features
 y = cldf["num"] # target variable
 
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.2, random_state=42
+    X, y, test_size=0.2, random_state=42, stratify=y
     ) # split the data into training and testing sets, with 20% of the data used for testing and a random state of 42 for reproducibility
 
 # break 1: X_test = X_test.drop("age",axis=1) # drop the "age" column from the test set, as it is not needed for prediction and may cause issues with the model
@@ -49,7 +51,7 @@ X_train = scaler.fit_transform(X_train) # fit the scaler to the training feature
 X_test = scaler.transform(X_test) # transform the test features using the same scaler (note: we should use the same scaler for both training and testing data to ensure consistency)
 # print(X_test[:5])
 
-model = LogisticRegression(max_iter = 1000) # create a logistic regression model
+model = LogisticRegression(max_iter = 2000) # create a logistic regression model
 model.fit(X_train,y_train) # fit the model to the training data
 
 # %%
@@ -60,10 +62,12 @@ print("Confusion Matrix:\n", confusion_matrix(y_test,y_pred))
 
 
 with open("heart_disease_model.pkl","wb") as f:
-    pickle.dump(model,f) # save the trained model to a file using pickle
+    pickle.dump((scaler,model),f) # save the trained model to a file using pickle
 
 sample = X_test[0:4] # take the first sample from the test set
 print("Prediction for the sample:", model.predict(sample)) # make a prediction for the sample using the trained model   
 print("Actual label for the sample:", y_test.iloc[0:4].values) # print the actual label for the sample to compare with the prediction
 
+y_prob = model.predict_proba(X_test)[:, 1]
+print("ROC-AUC:", roc_auc_score(y_test, y_prob))
 
