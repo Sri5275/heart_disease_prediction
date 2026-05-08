@@ -16,16 +16,17 @@ cldf = cldf.drop(columns=["dataset"]) # we will only use the Cleveland dataset f
 cldf["num"] = (cldf["num"]>0).astype(int) # originally num is 0-4, we will convert it to 0 and 1, where 1 means heart disease is present and 0 means heart disease is not present
 cldf = cldf.dropna() # drop any rows with missing values
 
-# print(cldf.head())
+# %%
+print(cldf.head())
 # print(cldf["cp"].value_counts())
 cldf = pd.get_dummies(cldf, columns=["sex","cp", "restecg", "slope", "thal"], drop_first=True) # convert categorical variables into dummy/indicator variables, and drop the first category to avoid multicollinearity
 
 # print(cldf.info())
-# print(cldf.isnull().sum())
+# print(cldf.isnull().sum()) 
 # print(cldf.describe())
 # print(cldf["num"].value_counts())
 
-# %%
+
 sns.countplot(x="num",data=cldf) # visualize the distribution of the target variable "num"
 plt.show()  
 
@@ -64,8 +65,5 @@ with open("heart_disease_model.pkl","wb") as f:
 sample = X_test[0:4] # take the first sample from the test set
 print("Prediction for the sample:", model.predict(sample)) # make a prediction for the sample using the trained model   
 print("Actual label for the sample:", y_test.iloc[0:4].values) # print the actual label for the sample to compare with the prediction
-
-
-#Step 10: Break the system, build a better model, and repeat the process
 
 
