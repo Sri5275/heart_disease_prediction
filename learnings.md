@@ -173,3 +173,84 @@ Because it ensures:
 * **ROC-AUC** = “Did I rank probabilities correctly?”
 * **Stratify** = “Did I test the model on a fair distribution?”
 
+# 📘 Feature Importance, Permutation Importance & PDP (Crisp Notes)
+
+---
+
+# 1. Feature Importance
+
+Tells:
+> Which features matter most to the model.
+
+### Types:
+- **Tree-based models**: importance from splits
+- **Linear models**: based on coefficients
+
+### Limitation:
+- Can be biased
+- Affected by correlated features
+
+
+# 2. Permutation Importance
+
+Library: :contentReference[oaicite:0]{index=0}
+
+Tells:
+> How much model performance drops when a feature is shuffled.
+
+### Steps:
+1. Train model
+2. Get baseline score
+3. Shuffle one feature
+4. Measure score drop
+
+### Interpretation:
+- Big drop → important feature
+- Small drop → unimportant feature
+
+### Pros:
+- Model-agnostic
+- Reliable
+
+### Cons:
+- Slow
+- Sensitive to correlated features
+
+
+# 3. Partial Dependence Plot (PDP)
+
+Tells:
+> How a feature affects model predictions on average.
+
+### How it works:
+- Fix one feature value
+- Average predictions across dataset
+
+### Interpretation:
+- Upward curve → increases prediction
+- Flat → no effect
+- Non-linear → complex relationship
+
+### Pros:
+- Easy visualization
+- Shows trend
+
+### Cons:
+- Assumes feature independence
+- Misses feature interactions
+
+
+# ⚖️ Quick Comparison
+
+| Method | Type | Answer |
+|--------|------|--------|
+| Feature Importance | Global | What matters? |
+| Permutation Importance | Global | What truly affects performance? |
+| PDP | Global | How does feature affect prediction? |
+
+
+# 🧠 Final Insight
+
+- Feature Importance → importance estimate
+- Permutation Importance → real impact test
+- PDP → behavior visualization
